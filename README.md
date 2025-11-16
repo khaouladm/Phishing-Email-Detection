@@ -52,30 +52,6 @@ Simple interface:
 * Click **Predict**
 * See classification instantly
 
----
-
-# 📁 Project Structure
-
-```
-project/
-│── data/
-│── models/
-│     ├── best_spam_classifier.pkl
-│     └── tfidf_vectorizer.pkl
-│
-│── src/
-│     ├── preprocessing.py
-│     ├── feature_importance.py
-│     ├── model_loader.py
-│     ├── train.py
-│     ├── predict.py
-│     └── email_classifier_interface.py
-│
-│── README.md
-│── requirements.txt
-```
-
----
 
 # 🛠 Installation
 
@@ -186,17 +162,5 @@ Converts cleaned emails into numerical vectors.
 ### ✔ Multinomial Naive Bayes
 
 Best for bag-of-words and TF-IDF text classification.
-
----
-
-# 🚀 Future Improvements
-
-* Use BERT embeddings
-* Add email sender metadata
-* Improve UI style
-* Add FastAPI backend
-* Use model versioning (MLflow)
-
----
 
 
