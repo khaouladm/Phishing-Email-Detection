@@ -91,18 +91,20 @@ st.markdown("Collez le contenu d'un email (avec les headers si possible) pour an
 # Chargement du modèle avec chemin spécifique
 @st.cache_resource
 def load_model():
-    # Chemin absolu vers votre dossier models
-    # Note: Comme le chemin est absolu, déplacer app.py n'affecte pas le chargement
-    model_path = r"C:\Users\khaol\OneDrive\Desktop\Phishing-Email-Detection\models\best_phishing_model.pkl"
-    
+    # Monte d'un dossier → va dans /models
+    base_dir = os.path.dirname(os.path.abspath(__file__))   # chemin vers src/
+    model_path = os.path.join(base_dir, "..", "models", "best_phishing_model.pkl")
+    model_path = os.path.abspath(model_path)
+
+    if not os.path.exists(model_path):
+        st.error(f"❌ Modèle introuvable : {model_path}")
+        st.info("Assurez-vous que 'best_phishing_model.pkl' est dans /models.")
+        return None
+
     try:
         return joblib.load(model_path)
-    except FileNotFoundError:
-        st.error(f"❌ Modèle introuvable à l'adresse : {model_path}")
-        st.info("Vérifiez que le fichier 'best_phishing_model.pkl' est bien dans le dossier 'models'.")
-        return None
     except Exception as e:
-        st.error(f"Erreur de chargement du modèle : {e}")
+        st.error(f"Erreur lors du chargement du modèle : {e}")
         return None
 
 model = load_model()
