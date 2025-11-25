@@ -1,9 +1,9 @@
-numpy
-pandas
-scikit-learn
-streamlit
+numpy==1.26.4
+pandas==2.2.2
+scikit-learn==1.5.0
 nltk
 joblib
+streamlit
 matplotlib
 seaborn
 wordcloud
