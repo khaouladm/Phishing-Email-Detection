@@ -1,108 +1,138 @@
-# Phishing-Email-Detection
-AI-based phishing email detection using NLP and ML — classifies emails as phishing or legitimate.
-Here is a **clean, professional, production-ready README.md** for your email spam classifier project.
-It matches the architecture we created (`src/`, Streamlit UI, TF-IDF, preprocessing, predict.py, trained model, etc.).
+Here is a **fully rewritten, clean, professional README** adapted EXACTLY to *your project*:
+✅ **Phishing Email Detection**
+✅ Uses **headers + NLP + TF-IDF + feature engineering**
+✅ File structure: `src/`, `models/`, Streamlit UI
+✅ Works for deployment (Hugging Face / Docker / Streamlit Cloud)
 
 ---
 
-# 📧 Email Spam Classifier — ML Project
+# 🛡️ Phishing Email Detection — NLP & Machine Learning
 
-A machine-learning application that classifies emails as **SPAM** or **HAM** using text preprocessing, TF-IDF vectorization, and a trained Naive Bayes model.
+AI-based phishing email detection system that analyzes **email headers + text content** to classify messages as **Phishing** or **Legitimate**.
+
 The project includes:
 
-✅ Clean modular code in `src/`
-✅ A Streamlit web interface
-✅ Preprocessing + TF-IDF + model loading
-✅ Easy prediction workflow
-✅ Reusable training pipeline
+✔ Full **text preprocessing pipeline** (cleaning, lemmatization, stopwords)
+✔ **Feature engineering** (URL count, suspicious words, caps ratio…)
+✔ **TF-IDF vectorization + ML models**
+✔ A clean **Streamlit web app** (copy–paste an email → instant classification)
+✔ Modular code inside `src/`
+✔ Saved trained model inside `models/`
 
 ---
 
 # 🚀 Features
 
-### 🔍 **1. Email Spam Detection**
+### 🔍 **1. Phishing Detection (Content + Header Analysis)**
 
-Paste any email text → the model predicts:
+The app extracts features from:
 
-* **SPAM**
-* **HAM (not spam)**
+* **Email subject**
+* **Sender (`From:`)**
+* **Email body**
+* **Embedded URLs**
+* **Suspicious vocabulary**
+* **Capital letters ratio**
 
-### 🧹 **2. Text Preprocessing**
+And predicts:
 
-Uses the following steps:
+* ⚠️ **Phishing**
+* 🛡️ **Legitimate**
 
-* lowercase
-* URL removal
-* punctuation/number cleaning
-* stopwords removal
-* lemmatization (WordNet)
+---
+
+### 🧹 **2. Text Preprocessing Pipeline**
+
+Includes:
+
+* Lowercasing
+* Removing URLs
+* Removing special characters
+* Stopwords removal (NLTK)
+* Lemmatization
+* Combining Subject + Body
+
+---
 
 ### 📊 **3. Machine Learning Pipeline**
 
 * TF-IDF vectorizer
-* Multinomial Naive Bayes (best for text classification)
-* Train/test split
-* Model persisted with pickle
+* ColumnTransformer (NLP + numerical features)
+* ML models compared (LogReg, SVM, RandomForest, etc.)
+* Best model saved as:
 
-### 🖥 **4. Streamlit Interface**
-
-Simple interface:
-
-* Paste email
-* Click **Predict**
-* See classification instantly
-
-
-# 🛠 Installation
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/yourname/spam-classifier.git
-cd spam-classifier
+```
+models/best_phishing_model.pkl
 ```
 
-### 2. Create a virtual environment
+---
+
+### 🖥 **4. Streamlit Web App**
+
+Features:
+
+* Paste raw email text (with headers)
+* Automatic feature extraction
+* Fast prediction
+* Risk indicators (URLs, suspicious words, caps ratio)
+
+Run:
+
+```
+streamlit run src/app.py
+```
+
+---
+
+# 🛠️ Installation
+
+### 1️⃣ Clone the repository
+
+```bash
+git clone https://github.com/yourname/Phishing-Email-Detection.git
+cd Phishing-Email-Detection
+```
+
+### 2️⃣ Create a virtual environment
 
 ```bash
 python -m venv venv
-source venv/bin/activate    # Mac/Linux
-venv\Scripts\activate       # Windows
+source venv/bin/activate     # Mac/Linux
+venv\Scripts\activate        # Windows
 ```
 
-### 3. Install dependencies
+### 3️⃣ Install dependencies
 
-```
+```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-# 📌 Training the Model
+# 🔧 Training the Model
 
-You must have a dataset in:
+Your dataset should be inside:
 
 ```
-data/emails.csv
+data/raw/Enron.csv
 ```
 
-Expected format:
+Expected columns:
 
-| text          | label  |
+| text_combined | label  |
 | ------------- | ------ |
-| email content | 0 or 1 |
+| email text    | 0 or 1 |
 
-Run training:
+Train the model:
 
 ```bash
-python src/train.py
+python src/train_model.py
 ```
 
-This will generate:
+This generates:
 
 ```
-models/best_spam_classifier.pkl
-models/tfidf_vectorizer.pkl
+models/best_phishing_model.pkl
 ```
 
 ---
@@ -113,37 +143,41 @@ models/tfidf_vectorizer.pkl
 python src/predict.py
 ```
 
-Paste an email when prompted.
+Paste any email → see prediction.
 
 ---
 
-# 🖥 Running the Streamlit Interface (Recommended)
+# 🖥️ Running the Streamlit App
+
+```bash
+streamlit run src/app.py
+```
+
+Then open:
 
 ```
-streamlit run src/email_classifier_interface.py
+http://localhost:8501
 ```
 
-Your UI will open in the browser:
-
-* Paste the email
-* Click **Predict**
-* See result (SPAM or HAM)
+Paste an email → get classification.
 
 ---
 
-# 📦 Requirements
-
-Add this to **requirements.txt**:
+# 📦 Requirements (requirements.txt)
 
 ```
 streamlit
 pandas
-scikit-learn
-nltk
 numpy
+scikit-learn==1.5.0
+nltk
+joblib
+matplotlib
+seaborn
+wordcloud
 ```
 
-If WordNet is missing:
+If needed:
 
 ```python
 import nltk
@@ -153,14 +187,32 @@ nltk.download("wordnet")
 
 ---
 
-# 🧠 Algorithm Used
+# 🤖 Model Overview
 
-### ✔ TF-IDF Vectorizer
+### ✔ NLP + TF-IDF Embedding
 
-Converts cleaned emails into numerical vectors.
+Transforms processed text to numerical vectors.
 
-### ✔ Multinomial Naive Bayes
+### ✔ Feature Engineering
 
-Best for bag-of-words and TF-IDF text classification.
+Adds security-related features:
+
+* URL count
+* Suspicious word frequency
+* Capital letters ratio
+* Email subject and sender
+
+### ✔ Best Model (Grid Search)
+
+* Logistic Regression
+* RandomForest
+* Linear SVM
+* Gradient Boosting
+
+---
+
+# 🚀 Deployment 
+
+### 🔸 Hugging Face Spaces — free : https://huggingface.co/spaces/Khaoula34/Phishing-Email-Detection
 
 
