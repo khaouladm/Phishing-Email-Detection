@@ -1,11 +1,3 @@
-Here is a **fully rewritten, clean, professional README** adapted EXACTLY to *your project*:
-✅ **Phishing Email Detection**
-✅ Uses **headers + NLP + TF-IDF + feature engineering**
-✅ File structure: `src/`, `models/`, Streamlit UI
-✅ Works for deployment (Hugging Face / Docker / Streamlit Cloud)
-
----
-
 # 🛡️ Phishing Email Detection — NLP & Machine Learning
 
 AI-based phishing email detection system that analyzes **email headers + text content** to classify messages as **Phishing** or **Legitimate**.
