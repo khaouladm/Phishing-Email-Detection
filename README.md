@@ -198,8 +198,7 @@ Adds security-related features:
 
 * Logistic Regression
 * RandomForest
-* Linear SVM
-* Gradient Boosting
+* Linear SVc
 
 ---
 
